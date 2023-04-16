@@ -1,0 +1,13 @@
+<mat-dialog-content>
+    <p class="negrito">Cliente: {{data.nome}} - {{data.cnpj | mask: '00.000.000/0000-00'}}</p>
+    <p>{{data.estado}}, {{data.cidade}}, {{data.bairro}}, {{data.logradouro}}, {{data.complemento}}, {{data.cep | mask: '00000-000'}}</p>
+    <google-map 
+    [center]="center"
+    [height]="350"
+    width="100%">
+    <map-marker 
+    [position]="marker.position"
+    [label]="marker.label"
+    [title]="marker.title"></map-marker>
+    </google-map>
+</mat-dialog-content>

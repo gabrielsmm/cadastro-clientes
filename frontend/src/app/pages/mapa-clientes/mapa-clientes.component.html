@@ -1,0 +1,32 @@
+<app-header></app-header>
+
+<div class="container text-center p-4">
+    <h1>Mapa de clientes</h1>
+    <div *ngIf="totalElements <= 0 && isBlank(filtro)" class="text-center">
+        <p class="text-green negrito">Ops! Nenhum cliente cadastrado até o momento</p>
+        <button class="mt-3" [routerLink]="['/cadastro']">Ir para cadastro <i class="bi bi-arrow-right"></i></button>
+    </div>
+    <div *ngIf="totalElements > 0 || !isBlank(filtro)" class="row mb-2">
+        <div class="col-md-6 d-flex align-items-start">
+            <input type="text" placeholder="Filtrar endereço" [(ngModel)]="filtro" (ngModelChange)="onFiltroChange($event)">
+            <button *ngIf="!isBlank(filtro)" matTooltip="Buscar" class="button-filtro" (click)="buscarClick()"><i class="bi bi-search"></i></button>
+            <button *ngIf="!isBlank(filtro)" matTooltip="Limpar" class="button-filtro button-amarelo" (click)="limparFiltroClick()"><i class="bi bi-backspace"></i></button>
+        </div>
+        <div class="col-md-6 d-flex justify-content-end align-items-center">
+            <button [routerLink]="['/cadastro']">Ir para cadastro <i class="bi bi-arrow-right"></i></button>
+        </div>
+    </div>
+    <p *ngIf="totalElements <= 0 && !isBlank(filtro)" class="text-green text-center negrito">Ops! Nenhum cliente encontrado</p>
+
+    <div class="center mt-3">
+        <google-map
+        [center]="center"
+        [zoom]="4">
+        <map-marker *ngFor="let marker of markers"
+            [position]="marker.position"
+            [label]="marker.label"
+            [title]="marker.title"
+        ></map-marker>
+    </google-map>
+    </div>
+</div>

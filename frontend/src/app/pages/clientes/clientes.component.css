@@ -1,0 +1,43 @@
+p {
+    margin: 0;
+}
+
+.negrito {
+    font-weight: bold;
+}
+
+.text-green {
+    color: #139153;
+}
+
+.page-link-green {
+    background-color: #139153;
+    border-color: #139153;
+}
+
+.active .page-link {
+    color: #FFF;
+}
+
+.page-link {
+    color: #139153;
+}
+
+.button {
+    margin-right: 3px;
+    padding: 11px 8px;
+}
+
+.button-vermelho {
+    background-color: #ce7981;
+    color: #611e24;
+}
+
+.button-amarelo {
+    background-color: #ff9800;
+    color: #FF4500;
+}
+
+.button-filtro {
+    margin-left: 5px;
+}

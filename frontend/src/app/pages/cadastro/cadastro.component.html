@@ -1,0 +1,66 @@
+<app-header></app-header>
+
+<div class="container text-center p-4">
+    <h1>{{titulo}}</h1>
+    <div class="d-flex justify-content-end mb-3">
+        <button [routerLink]="['/clientes']">Ver clientes <i class="bi bi-arrow-right"></i></button>
+    </div>
+    <form [formGroup]="cadastroForm" (ngSubmit)="onSubmit()">
+        <div class="row">
+            <div class="col-md-6">
+                <input type="text" placeholder="Nome" formControlName="nome">          
+            </div>
+            <div class="col-md-6">
+                <input type="text" placeholder="CNPJ" formControlName="cnpj"  mask="00.000.000/0000-00">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <input (input)="validarCep($event)" type="text" placeholder="CEP" formControlName="cep" mask="00000-000">
+            </div>
+            <div class="col-md-6">
+                <input readonly tabindex="-1" type="text" placeholder="Estado" formControlName="estado">          
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <input readonly tabindex="-1" type="text" placeholder="Cidade" formControlName="cidade">
+            </div>
+            <div class="col-md-6">
+                <input readonly tabindex="-1" type="text" placeholder="Bairro" formControlName="bairro">         
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <input readonly tabindex="-1" type="text" placeholder="Logradouro" formControlName="logradouro">
+            </div>
+            <div class="col-md-6">
+                <input type="text" placeholder="Complemento" formControlName="complemento">
+            </div>
+        </div>
+
+        <div *ngIf="showErro" class="alert alert-danger">
+            {{msgErro}}
+        </div>
+
+        <div *ngIf="showSucesso" class="alert alert-success">
+            Cadastro realizado com sucesso!
+        </div>
+
+        <input type="submit" [value]="isEditar ? 'Salvar' : 'Cadastrar'" 
+                   matTooltip="Verifique se as informações foram corretamente preenchidas" 
+                   [matTooltipDisabled]="cadastroForm.valid"
+                   [disabled]="!cadastroForm.valid">
+    </form>
+
+    <div *ngIf="showMap" class="center mt-3">
+        <google-map [center]="center"
+                    [height]="350">
+            <map-marker
+            [position]="marker.position"
+            [label]="marker.label"
+            [title]="marker.title"
+            ></map-marker>
+        </google-map>
+    </div>
+</div>

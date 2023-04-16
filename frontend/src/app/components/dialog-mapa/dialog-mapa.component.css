@@ -1,0 +1,11 @@
+p {
+    margin: 0;
+}
+
+.negrito {
+    font-weight: bold;
+}
+
+mat-dialog-content {
+    overflow: hidden;
+}

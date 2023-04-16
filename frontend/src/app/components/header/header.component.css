@@ -1,0 +1,16 @@
+.container-fluid {
+    background-color: #139153;
+    font-size: 1.2em;
+}
+
+.navbar-brand {
+    width: calc(30%);
+}
+
+.nav-item {
+    margin-right: 8px;
+}
+
+.navbar {
+    padding: 0;
+}
