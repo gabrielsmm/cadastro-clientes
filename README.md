@@ -124,6 +124,7 @@ ng serve
 </ul>
 
 <img src="imagens/cadastro-clientes.png" alt="Cadastro de clientes">
+
 > Na tela acima, é possível realizar o cadastro de um cliente contando com validação de CEP por meio da API do ViaCep e obtenção da latitude e longitude do cliente por meio da API do Google Maps e sua exibição.
 
 <h4>2. Visualização de clientes no mapa</h4>
@@ -135,15 +136,19 @@ ng serve
 </ul>
 
 <img src="imagens/exibicao-clientes.png" alt="Exibição de clientes">
+
 > A tela acima exibe os clientes de forma listada, oferecendo opções para edição, exclusão e visualização da localização do cliente no mapa.
 
 <img src="imagens/exibicao-mapa-cliente.png" alt="Mapa de um cliente">
+
 > A imagem acima ilustra a exibição da localização do cliente selecionado com informações mais detalhadas sobre a sua localização.
 
 <img src="imagens/mapa-clientes.png" alt="Mapa de clientes">
+
 > A tela acima se trata da exibição de todos os clientes cadastrados em um mapa com marcações em vermelho e o nome do cliente.
 
 <img src="imagens/mapa-clientes-filtrado.png" alt="Mapa de clientes filtrado">
+
 > A imagem acima demonstra a utilização da ferramenta de filtro para trazer somente clientes que possuem alguma ocorrência do filtro informado em seus endereços.
 
 <h4>3. Requisitos não funcionais</h4>
