@@ -4,9 +4,6 @@ import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.ArrayList;
-import java.util.List;
-
 @Data
 @NoArgsConstructor
 @Entity
@@ -21,8 +18,8 @@ public class Cliente {
     @Column(unique = true)
     private String cnpj;
 
-    @OneToMany(mappedBy="cliente", cascade=CascadeType.ALL)
-    private List<Endereco> enderecos = new ArrayList<>();
+    @OneToOne(mappedBy = "cliente", cascade=CascadeType.ALL)
+    private Endereco endereco;
 
     public Cliente(Integer id, String nome, String cnpj) {
         this.id = id;

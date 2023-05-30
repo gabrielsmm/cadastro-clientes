@@ -31,11 +31,11 @@ public class DbService {
         Endereco end4 = new Endereco(null, "SP", "São Paulo", "Osasco", "Av. das FLores", "", "02675031", -23.53, -46.79, c4);
         Endereco end5 = new Endereco(null, "RJ", "Rio de Janeiro", "Copacabana", "R. Miguel Lemos", "", "22071000", -22.97, -43.19, c5);
 
-        c1.getEnderecos().add(end1);
-        c2.getEnderecos().add(end2);
-        c3.getEnderecos().add(end3);
-        c4.getEnderecos().add(end4);
-        c5.getEnderecos().add(end5);
+        c1.setEndereco(end1);
+        c2.setEndereco(end2);
+        c3.setEndereco(end3);
+        c4.setEndereco(end4);
+        c5.setEndereco(end5);
 
         this.clienteRepository.saveAll(Arrays.asList(c1, c2, c3, c4, c5));
         this.enderecoRepository.saveAll(Arrays.asList(end1, end2, end3, end4, end5));

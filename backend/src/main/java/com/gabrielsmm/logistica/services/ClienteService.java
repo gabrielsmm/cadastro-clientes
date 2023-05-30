@@ -33,24 +33,23 @@ public class ClienteService {
                 "Objeto não encontrado! Id: " + id + ", Tipo: " + Cliente.class.getName()));
     }
 
-    public Cliente insert(Cliente obj) {
+    public Cliente insert(ClienteFormDTO objDto) {
+        Cliente obj = fromDTO(objDto);
         try {
             obj.setId(null);
             obj = clienteRepository.save(obj);
-            enderecoRepository.saveAll(obj.getEnderecos());
             return obj;
-        } catch (Exception e) {
+        } catch (DataIntegrityViolationException e) {
             throw new DataIntegrityException("Não foi possível inserir, CNPJ já cadastrado.");
         }
     }
 
-    public Cliente update(ClienteFormDTO objDto) {
-        Cliente newObj = find(objDto.getId());
+    public Cliente update(Integer id, ClienteFormDTO objDto) {
+        Cliente newObj = find(id);
         try {
             updateData(newObj, objDto);
-            enderecoRepository.saveAll(newObj.getEnderecos());
             return clienteRepository.save(newObj);
-        } catch (Exception e) {
+        } catch (DataIntegrityViolationException e) {
             throw new DataIntegrityException("Não foi possível atualizar, CNPJ já cadastrado.");
         }
     }
@@ -60,7 +59,7 @@ public class ClienteService {
         try {
             clienteRepository.deleteById(id);
         } catch (DataIntegrityViolationException e) {
-            throw new DataIntegrityException("Não é possível excluir");
+            throw new DataIntegrityException("Ocorreu um erro ao excluir");
         }
     }
 
@@ -77,27 +76,27 @@ public class ClienteService {
         }
     }
 
-    private void updateData(Cliente newObj, ClienteFormDTO obj) {
+    private void updateData(Cliente obj, ClienteFormDTO objDto) {
         // Atualizando cliente
-        newObj.setNome(obj.getNome());
-        newObj.setCnpj(obj.getCnpj());
+        obj.setNome(objDto.getNome());
+        obj.setCnpj(objDto.getCnpj());
 
         // Atualizando endereço
-        Endereco end = newObj.getEnderecos().get(0);
-        end.setEstado(obj.getEstado());
-        end.setCidade(obj.getCidade());
-        end.setBairro(obj.getBairro());
-        end.setLogradouro(obj.getLogradouro());
-        end.setComplemento(obj.getComplemento());
-        end.setCep(obj.getCep());
-        end.setLatitude(obj.getLatitude());
-        end.setLongitude(obj.getLongitude());
+        Endereco end = obj.getEndereco();
+        end.setEstado(objDto.getEstado());
+        end.setCidade(objDto.getCidade());
+        end.setBairro(objDto.getBairro());
+        end.setLogradouro(objDto.getLogradouro());
+        end.setComplemento(objDto.getComplemento());
+        end.setCep(objDto.getCep());
+        end.setLatitude(objDto.getLatitude());
+        end.setLongitude(objDto.getLongitude());
     }
 
     public Cliente fromDTO(ClienteFormDTO objDto) {
         Cliente cli = new Cliente(null, objDto.getNome(), objDto.getCnpj());
         Endereco end = new Endereco(null, objDto.getEstado(), objDto.getCidade(), objDto.getBairro(), objDto.getLogradouro(), objDto.getComplemento(), objDto.getCep(), objDto.getLatitude(), objDto.getLongitude(), cli);
-        cli.getEnderecos().add(end);
+        cli.setEndereco(end);
         return cli;
     }
 

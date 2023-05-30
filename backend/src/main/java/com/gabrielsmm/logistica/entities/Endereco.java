@@ -27,7 +27,8 @@ public class Endereco {
     private Double longitude;
 
     @JsonIgnore
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name="cliente_id")
     private Cliente cliente;
+
 }

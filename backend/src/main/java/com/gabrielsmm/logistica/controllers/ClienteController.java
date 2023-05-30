@@ -29,8 +29,7 @@ public class ClienteController {
 
     @PostMapping
     public ResponseEntity<Void> insert(@Valid @RequestBody ClienteFormDTO objDto) {
-        Cliente obj = clienteService.fromDTO(objDto);
-        obj = clienteService.insert(obj);
+        Cliente obj = clienteService.insert(objDto);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
                 .path("/{id}").buildAndExpand(obj.getId()).toUri();
         return ResponseEntity.created(uri).build();
@@ -38,7 +37,7 @@ public class ClienteController {
 
     @PutMapping(value="/{id}")
     public ResponseEntity<Void> update(@Valid @RequestBody ClienteFormDTO objDto, @PathVariable Integer id) {
-        Cliente obj = clienteService.update(objDto);
+        clienteService.update(id, objDto);
         return ResponseEntity.noContent().build();
     }
 

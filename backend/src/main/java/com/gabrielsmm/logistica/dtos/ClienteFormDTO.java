@@ -11,8 +11,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class ClienteFormDTO {
 
-    private Integer id;
-
     @NotBlank(message="Preenchimento do nome é obrigatório")
     private String nome;
 
