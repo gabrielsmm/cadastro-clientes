@@ -4,11 +4,9 @@ import com.gabrielsmm.logistica.dtos.ClienteFormDTO;
 import com.gabrielsmm.logistica.entities.Cliente;
 import com.gabrielsmm.logistica.entities.Endereco;
 import com.gabrielsmm.logistica.repositories.ClienteRepository;
-import com.gabrielsmm.logistica.repositories.EnderecoRepository;
 import com.gabrielsmm.logistica.services.exceptions.DataIntegrityException;
 import com.gabrielsmm.logistica.services.exceptions.ObjectNotFoundException;
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -21,11 +19,11 @@ import java.util.Optional;
 @Service
 public class ClienteService {
 
-    @Autowired
     private ClienteRepository clienteRepository;
 
-    @Autowired
-    private EnderecoRepository enderecoRepository;
+    public ClienteService(ClienteRepository clienteRepository) {
+        this.clienteRepository = clienteRepository;
+    }
 
     public Cliente find(Integer id) {
         Optional<Cliente> obj = clienteRepository.findById(id);

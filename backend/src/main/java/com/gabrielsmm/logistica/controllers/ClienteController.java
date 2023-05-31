@@ -4,7 +4,6 @@ import com.gabrielsmm.logistica.dtos.ClienteFormDTO;
 import com.gabrielsmm.logistica.entities.Cliente;
 import com.gabrielsmm.logistica.services.ClienteService;
 import jakarta.validation.Valid;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,8 +17,11 @@ import java.util.List;
 @RequestMapping(value = "/clientes")
 public class ClienteController {
 
-    @Autowired
     private ClienteService clienteService;
+
+    public ClienteController(ClienteService clienteService) {
+        this.clienteService = clienteService;
+    }
 
     @GetMapping(value="/{id}")
     public ResponseEntity<Cliente> find(@PathVariable Integer id) {

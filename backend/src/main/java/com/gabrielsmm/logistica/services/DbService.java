@@ -4,7 +4,6 @@ import com.gabrielsmm.logistica.entities.Cliente;
 import com.gabrielsmm.logistica.entities.Endereco;
 import com.gabrielsmm.logistica.repositories.ClienteRepository;
 import com.gabrielsmm.logistica.repositories.EnderecoRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
@@ -12,11 +11,14 @@ import java.util.Arrays;
 @Service
 public class DbService {
 
-    @Autowired
     private ClienteRepository clienteRepository;
 
-    @Autowired
     private EnderecoRepository enderecoRepository;
+
+    public DbService(ClienteRepository clienteRepository, EnderecoRepository enderecoRepository) {
+        this.clienteRepository = clienteRepository;
+        this.enderecoRepository = enderecoRepository;
+    }
 
     public void instanciaBaseDeDados() {
         Cliente c1 = new Cliente(null, "Atacado Max", "15398293000184");
