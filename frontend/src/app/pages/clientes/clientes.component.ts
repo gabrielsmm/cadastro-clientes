@@ -3,6 +3,7 @@ import { ClientesService } from './clientes.service';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogMapaComponent } from 'src/app/components/dialog-mapa/dialog-mapa.component';
 import { Router } from '@angular/router';
+import { Cliente } from 'src/app/models/Cliente.model';
 
 @Component({
   selector: 'app-clientes',
@@ -11,7 +12,7 @@ import { Router } from '@angular/router';
 })
 export class ClientesComponent implements OnInit {
 
-  public clientes: any[] = [];
+  public clientes: Cliente[] = [];
 
   // filtro
   public filtro: string = '';
@@ -36,7 +37,7 @@ export class ClientesComponent implements OnInit {
   getClientes(page?: number, filter?: string) {
     this.clientesService.findPage(page, filter).subscribe({
       next: (data) => {
-        this.clientes = data.content.map(({enderecos: [{id: enderecoId, ...endereco}], id, ...resto} : any) => ({id, ...resto, ...endereco, enderecoId}));
+        this.clientes = data.content;
         this.first = data.first;
         this.last = data.last;
         this.totalElements = data.totalElements;

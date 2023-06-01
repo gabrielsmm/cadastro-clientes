@@ -1,6 +1,6 @@
 package com.gabrielsmm.logistica.controllers;
 
-import com.gabrielsmm.logistica.dtos.ClienteFormDTO;
+import com.gabrielsmm.logistica.dtos.ClienteDTO;
 import com.gabrielsmm.logistica.entities.Cliente;
 import com.gabrielsmm.logistica.services.ClienteService;
 import jakarta.validation.Valid;
@@ -11,6 +11,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @CrossOrigin(origins = "*")
 @RestController
@@ -24,13 +25,13 @@ public class ClienteController {
     }
 
     @GetMapping(value="/{id}")
-    public ResponseEntity<Cliente> find(@PathVariable Integer id) {
-        Cliente obj = clienteService.find(id);
+    public ResponseEntity<ClienteDTO> find(@PathVariable Integer id) {
+        ClienteDTO obj = new ClienteDTO(clienteService.find(id));
         return ResponseEntity.ok().body(obj);
     }
 
     @PostMapping
-    public ResponseEntity<Void> insert(@Valid @RequestBody ClienteFormDTO objDto) {
+    public ResponseEntity<Void> insert(@Valid @RequestBody ClienteDTO objDto) {
         Cliente obj = clienteService.insert(objDto);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
                 .path("/{id}").buildAndExpand(obj.getId()).toUri();
@@ -38,7 +39,7 @@ public class ClienteController {
     }
 
     @PutMapping(value="/{id}")
-    public ResponseEntity<Void> update(@Valid @RequestBody ClienteFormDTO objDto, @PathVariable Integer id) {
+    public ResponseEntity<Void> update(@Valid @RequestBody ClienteDTO objDto, @PathVariable Integer id) {
         clienteService.update(id, objDto);
         return ResponseEntity.noContent().build();
     }
@@ -50,19 +51,19 @@ public class ClienteController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Cliente>> findAll() {
-        List<Cliente> list = clienteService.findAll();
+    public ResponseEntity<List<ClienteDTO>> findAll() {
+        List<ClienteDTO> list = clienteService.findAll().stream().map(ClienteDTO::new).collect(Collectors.toList());
         return ResponseEntity.ok().body(list);
     }
 
     @GetMapping(value="/page")
-    public ResponseEntity<Page<Cliente>> findPage(
+    public ResponseEntity<Page<ClienteDTO>> findPage(
             @RequestParam(value="page", defaultValue="0") Integer page,
             @RequestParam(value="linesPerPage", defaultValue="12") Integer linesPerPage,
             @RequestParam(value="orderBy", defaultValue="id") String orderBy,
             @RequestParam(value="direction", defaultValue="ASC") String direction,
             @RequestParam(value="filter", defaultValue = "") String filter) {
-        Page<Cliente> list = clienteService.findPage(page, linesPerPage, orderBy, direction, filter);
+        Page<ClienteDTO> list = clienteService.findPage(page, linesPerPage, orderBy, direction, filter).map(ClienteDTO::new);
         return ResponseEntity.ok().body(list);
     }
 

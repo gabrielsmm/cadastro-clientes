@@ -1,6 +1,6 @@
 package com.gabrielsmm.logistica.services;
 
-import com.gabrielsmm.logistica.dtos.ClienteFormDTO;
+import com.gabrielsmm.logistica.dtos.ClienteDTO;
 import com.gabrielsmm.logistica.entities.Cliente;
 import com.gabrielsmm.logistica.entities.Endereco;
 import com.gabrielsmm.logistica.repositories.ClienteRepository;
@@ -31,7 +31,7 @@ public class ClienteService {
                 "Objeto não encontrado! Id: " + id + ", Tipo: " + Cliente.class.getName()));
     }
 
-    public Cliente insert(ClienteFormDTO objDto) {
+    public Cliente insert(ClienteDTO objDto) {
         Cliente obj = fromDTO(objDto);
         try {
             obj.setId(null);
@@ -42,7 +42,7 @@ public class ClienteService {
         }
     }
 
-    public Cliente update(Integer id, ClienteFormDTO objDto) {
+    public Cliente update(Integer id, ClienteDTO objDto) {
         Cliente newObj = find(id);
         try {
             updateData(newObj, objDto);
@@ -74,7 +74,7 @@ public class ClienteService {
         }
     }
 
-    private void updateData(Cliente obj, ClienteFormDTO objDto) {
+    private void updateData(Cliente obj, ClienteDTO objDto) {
         // Atualizando cliente
         obj.setNome(objDto.getNome());
         obj.setCnpj(objDto.getCnpj());
@@ -91,7 +91,7 @@ public class ClienteService {
         end.setLongitude(objDto.getLongitude());
     }
 
-    public Cliente fromDTO(ClienteFormDTO objDto) {
+    public Cliente fromDTO(ClienteDTO objDto) {
         Cliente cli = new Cliente(null, objDto.getNome(), objDto.getCnpj());
         Endereco end = new Endereco(null, objDto.getEstado(), objDto.getCidade(), objDto.getBairro(), objDto.getLogradouro(), objDto.getComplemento(), objDto.getCep(), objDto.getLatitude(), objDto.getLongitude(), cli);
         cli.setEndereco(end);

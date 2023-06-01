@@ -69,7 +69,6 @@ export class CadastroComponent implements OnInit {
     if (clienteId) {
       this.cadastroService.find(clienteId).subscribe({
         next: (data: any) => {
-          data = {...data, ...data.enderecos[0], id: data.id, enderecoId: data.enderecos[0].id};
           this.isEditar = true;
           this.titulo = `Editar cliente ${data.id}`;
           this.clienteId = data.id;

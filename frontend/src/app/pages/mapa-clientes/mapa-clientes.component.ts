@@ -31,7 +31,7 @@ export class MapaClientesComponent implements OnInit {
       next: (data) => {
         this.clearMarkers();
         this.totalElements = data.totalElements;
-        const clientes = data.content.map(({enderecos: [{id: enderecoId, ...endereco}], id, ...resto} : any) => ({id, ...resto, ...endereco, enderecoId}));
+        const clientes = data.content;
         clientes.forEach((c: any) => this.addMarker(c));
       },
       error: (err) => {

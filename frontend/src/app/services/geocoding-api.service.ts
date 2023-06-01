@@ -1,15 +1,14 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, map } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 @Injectable()
 export class GeocodingApiService {
-    API_KEY: string;
-    API_URL: string;
+    private API_URL: string;
 
     constructor(private http: HttpClient) {
-        this.API_KEY = 'YOUR_API_KEY'
-        this.API_URL = `https://maps.googleapis.com/maps/api/geocode/json?key=${this.API_KEY}&address=`;
+        this.API_URL = `https://maps.googleapis.com/maps/api/geocode/json?key=${environment.googleApiKey}&address=`;
     }
 
     findFromAddress(estado?: string, cidade?: string, bairro?: string, logradouro?: string, complemento?: string, cep?: string): Observable<any> {

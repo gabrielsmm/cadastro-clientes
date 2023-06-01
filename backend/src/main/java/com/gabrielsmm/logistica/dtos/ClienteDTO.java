@@ -1,5 +1,6 @@
 package com.gabrielsmm.logistica.dtos;
 
+import com.gabrielsmm.logistica.entities.Cliente;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
@@ -9,7 +10,9 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class ClienteFormDTO {
+public class ClienteDTO {
+
+    private Integer id;
 
     @NotBlank(message="Preenchimento do nome é obrigatório")
     private String nome;
@@ -39,5 +42,19 @@ public class ClienteFormDTO {
     private Double latitude;
 
     private Double longitude;
+
+    public ClienteDTO(Cliente obj) {
+        this.id = obj.getId();
+        this.nome = obj.getNome();
+        this.cnpj = obj.getCnpj();
+        this.estado = obj.getEndereco().getEstado();
+        this.cidade = obj.getEndereco().getCidade();
+        this.bairro = obj.getEndereco().getBairro();
+        this.logradouro = obj.getEndereco().getLogradouro();
+        this.complemento = obj.getEndereco().getComplemento();
+        this.cep = obj.getEndereco().getCep();
+        this.latitude = obj.getEndereco().getLatitude();
+        this.longitude = obj.getEndereco().getLongitude();
+    }
 
 }
