@@ -14,3 +14,7 @@
 .navbar {
     padding: 0;
 }
+
+.active-link {
+    color: #FFF;
+}

@@ -5,6 +5,7 @@ import { GeocodingApiService } from 'src/app/services/geocoding-api.service';
 import { ValidaCepService } from 'src/app/services/valida-cep.service';
 import { CadastroService } from './cadastro.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { debounceTime } from 'rxjs';
 
 @Component({
   selector: 'app-cadastro',
@@ -40,7 +41,7 @@ export class CadastroComponent implements OnInit {
     cidade: new FormControl(this.cliente.cidade, [Validators.required]),
     bairro: new FormControl(this.cliente.bairro, [Validators.required]),
     logradouro: new FormControl(this.cliente.logradouro, [Validators.required]),
-    complemento: new FormControl(this.cliente.complemento, [Validators.required]),
+    complemento: new FormControl(this.cliente.complemento),
     cep: new FormControl(this.cliente.cep, [Validators.required])
   });
 
@@ -54,13 +55,8 @@ export class CadastroComponent implements OnInit {
 
   ngOnInit(): void {
     this.verificarEdicao();
-    this.cadastroForm.valueChanges.subscribe(value => {
-      if (this.cadastroForm.valid) {
-        this.atualizaLatLng();
-        this.showMap = true;
-      } else {
-        this.showMap = false;
-      }
+    this.cadastroForm.valueChanges.pipe(debounceTime(500)).subscribe(value => {
+      if (this.cadastroForm.valid) this.atualizarMapa();
     });
   }
 
@@ -70,7 +66,7 @@ export class CadastroComponent implements OnInit {
       this.cadastroService.find(clienteId).subscribe({
         next: (data: any) => {
           this.isEditar = true;
-          this.titulo = `Editar cliente ${data.id}`;
+          this.titulo = `Editar cliente ${data.nome}`;
           this.clienteId = data.id;
           this.cadastroForm.get('nome')?.setValue(data.nome);
           this.cadastroForm.get('cnpj')?.setValue(data.cnpj);
@@ -175,27 +171,30 @@ export class CadastroComponent implements OnInit {
     }
   }
 
-  atualizaLatLng() {
+  atualizarMapa() {
     const cliente = new Cliente(this.cadastroForm.value);
     this.geocodingApiService
     .findFromAddress(cliente.estado, cliente.cidade, cliente.bairro, cliente.logradouro, cliente.complemento, cliente.cep)
     .subscribe(response => {
-        if (response.status == 'OK') {
-          this.center = {
-            lat: response.results[0].geometry.location.lat,
-            lng: response.results[0].geometry.location.lng,
-          };
-          this.marker.position = {
-            lat: response.results[0].geometry.location.lat,
-            lng: response.results[0].geometry.location.lng,
-          };
-          this.marker.label = cliente.nome;
-          this.marker.title = cliente.nome;
-        } else if (response.status == 'ZERO_RESULTS') {
-            console.log('geocodingAPIService', 'ZERO_RESULTS', response.status);
-        } else {
-            console.log('geocodingAPIService', 'Other error', response.status);
-        }
+      if (response.status == 'OK') {
+        this.center = {
+          lat: response.results[0].geometry.location.lat,
+          lng: response.results[0].geometry.location.lng,
+        };
+        this.marker.position = {
+          lat: response.results[0].geometry.location.lat,
+          lng: response.results[0].geometry.location.lng,
+        };
+        this.marker.label = cliente.nome;
+        this.marker.title = cliente.nome;
+        this.showMap = true;
+      } else if (response.status == 'ZERO_RESULTS') {
+        console.log('geocodingAPIService', 'ZERO_RESULTS', response.status);
+        this.showMap = false;
+      } else {
+        console.log('geocodingAPIService', 'Other error', response.status);
+        this.showMap = false;
+      }
     });
   }
 
