@@ -1,7 +1,7 @@
 <app-header></app-header>
 
 <div class="container p-4">
-    <h1 class="text-center">Clientes</h1>
+    <h1 class="text-center">Clientes cadastrados</h1>
     <div *ngIf="totalElements <= 0 && isBlank(filtro)" class="text-center">
         <p class="text-green negrito">Ops! Nenhum cliente cadastrado até o momento</p>
         <button class="mt-3" [routerLink]="['/cadastro']">Ir para cadastro <i class="bi bi-arrow-right"></i></button>

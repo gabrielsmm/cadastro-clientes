@@ -53,9 +53,10 @@
                    [disabled]="!cadastroForm.valid">
     </form>
 
-    <div *ngIf="showMap" class="center mt-3">
+    <div *ngIf="showMap" class="mt-3">
         <google-map [center]="center"
-                    [height]="350">
+                    [height]="350"
+                    width="100%">
             <map-marker
             [position]="marker.position"
             [label]="marker.label"

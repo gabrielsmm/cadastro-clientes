@@ -19,7 +19,7 @@ export class CadastroComponent implements OnInit {
   public showSucesso: boolean = false;
   public showMap: boolean = false;
   public msgErro: string = '';
-  public titulo: string = 'Cadastro de clientes';
+  public titulo: string = 'Cadastrar novo cliente';
 
   public clienteId: number;
   public isEditar: boolean = false;
@@ -66,7 +66,7 @@ export class CadastroComponent implements OnInit {
       this.cadastroService.find(clienteId).subscribe({
         next: (data: any) => {
           this.isEditar = true;
-          this.titulo = `Editar cliente ${data.nome}`;
+          this.titulo = `Editar cliente: ${data.nome}`;
           this.clienteId = data.id;
           this.cadastroForm.get('nome')?.setValue(data.nome);
           this.cadastroForm.get('cnpj')?.setValue(data.cnpj);

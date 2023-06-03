@@ -1,10 +1,10 @@
-.container-fluid {
+.background {
     background-color: #139153;
-    font-size: 1.2em;
 }
 
 .navbar-brand {
     width: calc(30%);
+    font-size: 1.4em;
 }
 
 .nav-item {
@@ -13,8 +13,11 @@
 
 .navbar {
     padding: 0;
+    font-size: 1.3em;
+    min-height: 3rem;
 }
 
 .active-link {
     color: #FFF;
+    border-bottom: 1px solid #FFF;
 }
