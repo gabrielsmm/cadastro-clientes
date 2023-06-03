@@ -9,6 +9,7 @@ import {MatPaginatorModule} from '@angular/material/paginator';
 import { DialogMapaModule } from 'src/app/components/dialog-mapa/dialog-mapa.module';
 import { NgxMaskModule } from 'ngx-mask';
 import { FormsModule } from '@angular/forms';
+import { DialogConfirmacaoModule } from 'src/app/components/dialog-confirmacao/dialog-confirmacao.module';
 
 
 
@@ -24,6 +25,7 @@ import { FormsModule } from '@angular/forms';
     MatTooltipModule,
     MatPaginatorModule,
     DialogMapaModule,
+    DialogConfirmacaoModule,
     FormsModule,
     NgxMaskModule.forRoot()
   ]

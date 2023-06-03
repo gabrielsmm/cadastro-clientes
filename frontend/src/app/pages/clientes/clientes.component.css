@@ -22,22 +22,3 @@ p {
 .page-link {
     color: #139153;
 }
-
-.button {
-    margin-right: 3px;
-    padding: 11px 8px;
-}
-
-.button-vermelho {
-    background-color: #ce7981;
-    color: #580d13;
-}
-
-.button-amarelo {
-    background-color: #ff9800;
-    color: #ff2600;
-}
-
-.button-filtro {
-    margin-left: 5px;
-}

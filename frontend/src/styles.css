@@ -70,3 +70,22 @@ input[type="submit"]:hover {
 .hide {
     display: none;
 }
+
+.btn-vermelho {
+    background-color: #ce7981;
+    color: #580d13;
+}
+
+.btn-amarelo {
+    background-color: #ff9800;
+    color: #ff2600;
+}
+
+.btn-action {
+    margin-right: 3px;
+    padding: 11px 8px;
+}
+
+.btn-filtro {
+    margin-left: 5px;
+}

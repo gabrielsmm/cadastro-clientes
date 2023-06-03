@@ -4,25 +4,6 @@
     align-items: center;
 }
 
-.button {
-    margin-right: 3px;
-    padding: 11px 8px;
-}
-
-.button-vermelho {
-    background-color: #ce7981;
-    color: #611e24;
-}
-
-.button-amarelo {
-    background-color: #ff9800;
-    color: #FF4500;
-}
-
-.button-filtro {
-    margin-left: 5px;
-}
-
 .negrito {
     font-weight: bold;
 }

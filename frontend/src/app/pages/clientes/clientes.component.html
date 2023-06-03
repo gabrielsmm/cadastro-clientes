@@ -9,8 +9,8 @@
     <div *ngIf="totalElements > 0 || !isBlank(filtro)" class="row mb-2">
         <div class="col-md-6 d-flex align-items-start">
             <input type="text" placeholder="Filtrar endereço" [(ngModel)]="filtro" (ngModelChange)="onFiltroChange($event)">
-            <button *ngIf="!isBlank(filtro)" matTooltip="Buscar" class="button-filtro" (click)="buscarClick()"><i class="bi bi-search"></i></button>
-            <button *ngIf="!isBlank(filtro)" matTooltip="Limpar" class="button-filtro button-amarelo" (click)="limparFiltroClick()"><i class="bi bi-backspace"></i></button>
+            <button *ngIf="!isBlank(filtro)" matTooltip="Buscar" class="btn-filtro" (click)="buscarClick()"><i class="bi bi-search"></i></button>
+            <button *ngIf="!isBlank(filtro)" matTooltip="Limpar" class="btn-filtro btn-amarelo" (click)="limparFiltroClick()"><i class="bi bi-backspace"></i></button>
         </div>
         <div class="col-md-6 d-flex justify-content-end align-items-center">
             <button [routerLink]="['/mapa-clientes']">Ver no mapa <i class="bi bi-arrow-right"></i></button>
@@ -41,9 +41,9 @@
                     <p class="negrito">{{cliente.bairro}}</p>
                 </div>
                 <div class="col-md-2 d-flex justify-content-end">
-                    <button (click)="verEnderecoClick(cliente)" matTooltip="Ver no mapa" class="button"><i class="bi bi-geo-alt"></i></button>
-                    <button (click)="editarClick(cliente)" matTooltip="Editar cliente" class="button button-amarelo"><i class="bi bi-pencil"></i></button>
-                    <button (click)="excluirClick(cliente)" matTooltip="Excluir cliente" class="button button-vermelho"><i class="bi bi-trash"></i></button>
+                    <button (click)="verEnderecoClick(cliente)" matTooltip="Ver no mapa" class="btn-action"><i class="bi bi-geo-alt"></i></button>
+                    <button (click)="editarClick(cliente)" matTooltip="Editar cliente" class="btn-action btn-amarelo"><i class="bi bi-pencil"></i></button>
+                    <button (click)="excluirClick(cliente)" matTooltip="Excluir cliente" class="btn-action btn-vermelho"><i class="bi bi-trash"></i></button>
                 </div>
             </div>
         </mat-card-content>
